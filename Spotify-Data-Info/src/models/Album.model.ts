@@ -1,4 +1,4 @@
-import { Artist } from "./Artist.mode";
+import { Artist } from "./Artist.model";
 import { Image } from "./Image.model";
 
 export class Album {

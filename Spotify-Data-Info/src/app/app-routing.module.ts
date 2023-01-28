@@ -1,16 +1,20 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AlbumComponent } from './album/album.component';
+
 import { ArtistComponent } from './artist/artist.component';
-import { SearchComponent } from './search/search.component';
-import { TrackComponent } from './track/track.component';
+import { SearchTrackComponent } from './search-track/track.component';
+import { SearchAlbumComponent } from './search-album/search-album.component';
+import { SearchArtistComponent } from './search-artist/search-artist.component';
+import { AlbumComponent } from './album/album.component';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
-  {path: 'search', component: SearchComponent},
-  {path: 'search/artist', component: ArtistComponent},
+  {path: '', component: HomeComponent},
+  {path: 'track', component: SearchTrackComponent},
+  {path: 'artist', component: SearchArtistComponent},
   {path: 'artist/:id', component: ArtistComponent},
-  {path: 'search/album', component: AlbumComponent},
-  {path: 'search/tracks', component: TrackComponent}
+  {path: 'album', component: SearchAlbumComponent},
+  {path: 'album/:id', component: AlbumComponent}
 ];
 
 @NgModule({

@@ -1,1 +1,38 @@
-<p>album works!</p>
+<div class="container py-5">
+  <div class="row">
+    <div class="col">
+      <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+        <ol class="breadcrumb mb-0">
+          <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+          <li class="breadcrumb-item"><a routerLink="/album">Album</a></li>
+          <li class="breadcrumb-item active" aria-current="page">{{album.name}}</li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+
+  <div class="card p-3 mb-4">
+    <div class="d-flex">
+      <div class="flex-shrink-0">
+        <img src="{{album.images[1].url}}" alt="conver" class="rounded img-fluid">
+      </div>
+      <div class="flex-grow-1 ms-3 align-self-end mb-2">
+        <h1 class="mb-0">{{album.name}}</h1>
+        <p class="text-muted mb-0">{{tracks.length}} brani &bull; <a href="javascrip:void(0)"(click)="navigate(album.artists[0].id)">{{album.artists[0].name}}</a></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <h3>Brani</h3>
+    <div class="col-md-12">
+      <table class="table table-striped">
+        <tbody>
+          <tr *ngFor="let t of tracks">
+            <td><a [href]="spotify.sanitize(t.uri)">{{t.name}}</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
