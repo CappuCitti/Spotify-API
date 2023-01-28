@@ -17,10 +17,7 @@ export class SearchArtistComponent {
 
   search(e: any) {
     var q = e.target.value;
-    this.spotify.artists(q).subscribe((data) => {
-      console.log(data.artists)
-      this.artists = data.artists.items;
-    });
+    this.spotify.artists(q).subscribe(data => this.artists = data.artists.items);
   }
 
   navigate(id: string) {

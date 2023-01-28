@@ -4,12 +4,12 @@ import { Observable } from 'rxjs';
 import { DomSanitizer } from '@angular/platform-browser';
 
 import { Album } from 'src/models/Album.model';
+import { Albums } from 'src/models/Albums.model';
 import { Artist } from 'src/models/Artist.model';
 
 import { Data as AlbumsData } from 'src/models/AlbumsData.model';
 import { Data as AlbumTracksData } from 'src/models/AlbumTracksData.mode';
 import { Data as TrackData } from 'src/models/TracksData.model';
-import { Albums } from 'src/models/Albums.model';
 import { Data as ArtistsData} from 'src/models/ArtistsData.model';
 
 @Injectable({
@@ -17,26 +17,26 @@ import { Data as ArtistsData} from 'src/models/ArtistsData.model';
 })
 export class SpotifyService {
   private baseURL: string = 'https://api.spotify.com/v1';
-  private auth_token: string = 'BQD6plTbaIonheesFseYtUQwXH5c1vea7FDohBDvu7MyKfq2In0W-o87lsj71PF1EbQ1Ub89RHOMnlccSNIFS8IcUTgaE7As4wiI98HygcJktU6pqAbgvkHvcwlxuVVVbIFHDaB6jumHb_I7Hyszgh87E24fN3LRhGaXLcOIaLk';
+  private auth_token: string = 'BQDWan1uRXYgBK2u22wiRnQf7yXvYNzXTn2CXmbrwOfwOhpGemPef4RSGHOMu2QM07_cM-U4EfvLlNBRU8IGa5AmQqKEU0aLbGTBPZBNqdr-0FxH386ErREYqv52WpqAKf14XSsO4l5BTGKxWO0cZLHc5-LGgLwkTDEsSOGmITs';
 
   constructor(
     private http: HttpClient,
     private sanitizer: DomSanitizer
   ) { }
 
-  public sanitize(url: string) {
-    return this.sanitizer.bypassSecurityTrustUrl("spotify://" + url);
+  /**
+   * Rende il protollo di spotify un URL sicuro per il sito
+   * @param {string} params - Parametri
+   */
+  public sanitize(params: string) {
+    return this.sanitizer.bypassSecurityTrustUrl("spotify://" + params);
   }
 
-  public artist(id: string): Observable<Artist> {
-    return this.http.get<Artist>(`${this.baseURL}/artists/${id}`, {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${this.auth_token}`,
-      }
-    });
-  }
-
+  /**
+   * Restituisce tutti gli artisti coerenti con il termine di ricerca dato
+   * @param {string} query - Termine di ricerca
+   * @returns Observable<ArtistsData>
+   */
   public artists(query: string): Observable<ArtistsData> {
     return this.http.get<ArtistsData>(`${this.baseURL}/search`, {
       headers: {
@@ -50,6 +50,25 @@ export class SpotifyService {
     });
   }
 
+  /**
+   * Restituisce un osservabile con le informazioni dell'artista dato il suo ID
+   * @param {string} id - ID dell'artista 
+   * @returns Observable<Artist>
+   */
+  public artist(id: string): Observable<Artist> {
+    return this.http.get<Artist>(`${this.baseURL}/artists/${id}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${this.auth_token}`,
+      }
+    });
+  }
+
+  /**
+   * Restituisce un osservabile con gli album dato l'ID di un artista
+   * @param {string} id - ID dell'artista
+   * @returns Observable<Albums>
+   */
   public artistAlbums(id: string): Observable<Albums> {
     return this.http.get<Albums>(`${this.baseURL}/artists/${id}/albums`, {
       headers: {
@@ -59,6 +78,11 @@ export class SpotifyService {
     });
   }
 
+  /**
+   * Restituisce tutti i brani coerenti con il termine di ricerca dato
+   * @param {string} query - Termine di ricerca
+   * @returns Observable<TrackData>
+   */
   public tracks(query: string): Observable<TrackData> {
     return this.http.get<TrackData>(`${this.baseURL}/search`, {
       headers: {
@@ -72,6 +96,11 @@ export class SpotifyService {
     });
   }
 
+  /**
+   * Restituisce tutti gli album coerenti con il termine di ricerca dato
+   * @param {string} query - Termine di ricerca
+   * @returns Observable<AlbumsData>
+   */
   public albums(query: string): Observable<AlbumsData> {
     return this.http.get<AlbumsData>(`${this.baseURL}/search`, {
       headers: {
@@ -85,6 +114,11 @@ export class SpotifyService {
     });
   }
 
+  /**
+   * Restituisce un osservabile con le informazioni dell'album dato il suo ID
+   * @param {string} id - ID dell'album
+   * @returns Observable<Album>
+   */
   public album(id: string): Observable<Album> {
     return this.http.get<Album>(`${this.baseURL}/albums/${id}`, {
       headers: {
@@ -94,6 +128,11 @@ export class SpotifyService {
     });
   }
 
+  /**
+   * Restituisce i brani di un album dato il suo ID
+   * @param {string} id - ID dell'album
+   * @returns Observable<AlbumTracksData>
+   */
   public albumTracks(id: string): Observable<AlbumTracksData> {
     return this.http.get<AlbumTracksData>(`${this.baseURL}/albums/${id}/tracks`, {
       headers: {

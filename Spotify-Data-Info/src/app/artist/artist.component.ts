@@ -23,7 +23,7 @@ export class ArtistComponent implements OnInit {
     this.spotify.artistAlbums(id).subscribe(data => this.albums = data.items);
   }
 
-  albumNavigate(id: string) {
+  navigate(id: string) {
     this.router.navigate([`album/${id}`])
   }
 }

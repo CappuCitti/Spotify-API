@@ -21,11 +21,7 @@ export class AlbumComponent {
     var id = this.router.url.split('/')[2];
 
     this.spotify.album(id).subscribe(data => this.album = data);
-
-    this.spotify.albumTracks(id).subscribe(data => {
-      this.tracks = data.items;
-      console.log(this.tracks)
-    })
+    this.spotify.albumTracks(id).subscribe(data => this.tracks = data.items);
   }
 
   navigate(id: string) {

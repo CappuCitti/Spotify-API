@@ -62,7 +62,7 @@
   <div class="row row-cols-1 row-cols-md-4 g-4">
     <div class="col" *ngFor="let a of albums">
       <div class="card">
-        <a href="javascript:void(0)" (click)="albumNavigate(a.id)">
+        <a href="javascript:void(0)" (click)="navigate(a.id)">
           <img src="{{a.images[0].url}}" class="card-img-top" alt="{{ a.name }}" />
         </a>
         <div class="card-body">

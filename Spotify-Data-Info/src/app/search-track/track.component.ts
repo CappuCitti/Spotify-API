@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Track } from 'src/models/Track.model';
-import { Tracks } from 'src/models/Tracks.model';
 import { SpotifyService } from 'src/services/Spotify.service';
 
 @Component({
@@ -20,7 +19,7 @@ export class SearchTrackComponent implements OnInit {
 
   search(e: any) {
     var q = e.target.value;
-    this.spotify.tracks(q).subscribe((data) => this.tracks = data.tracks.items);
+    this.spotify.tracks(q).subscribe(data => this.tracks = data.tracks.items);
   }
 
   navigate(id: string) {
