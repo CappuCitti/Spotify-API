@@ -19,8 +19,4 @@ export class SearchArtistComponent {
     var q = e.target.value;
     this.spotify.artists(q).subscribe(data => this.artists = data.artists.items);
   }
-
-  navigate(id: string) {
-    this.router.navigate([`artist/${id}`])
-  }
 }

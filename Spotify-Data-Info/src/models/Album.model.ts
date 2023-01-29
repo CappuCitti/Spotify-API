@@ -9,7 +9,7 @@ export class Album {
     public external_urls: string = "",
     public href: string = "",
     public id: string = "",
-    public images: Image[] = [],
+    public images: Image[] = [new Image(), new Image(), new Image()],
     public name: string = "",
     public release_date: string = "",
     public release_date_precision: string = "",

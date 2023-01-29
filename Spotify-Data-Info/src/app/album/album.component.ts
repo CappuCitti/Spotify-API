@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, ParamMap, Route, Router } from '@angular/router';
 import { Album } from 'src/models/Album.model';
 import { Track } from 'src/models/Track.model';
 import { SpotifyService } from 'src/services/Spotify.service';
@@ -12,19 +12,23 @@ import { SpotifyService } from 'src/services/Spotify.service';
 export class AlbumComponent {
   album: Album = new Album();
   tracks: Track[] = [];
+  id: string | undefined = "";
+
   constructor(
     public spotify: SpotifyService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
-    var id = this.router.url.split('/')[2];
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      this.id = params.get('id')?.toString();
 
-    this.spotify.album(id).subscribe(data => this.album = data);
-    this.spotify.albumTracks(id).subscribe(data => this.tracks = data.items);
-  }
-
-  navigate(id: string) {
-    this.router.navigate([`artist/${id}`])
+      if (!this.id) this.router.navigate(['/album']);
+      else {
+        this.spotify.album(this.id).subscribe(data => this.album = data);
+        this.spotify.albumTracks(this.id).subscribe(data => this.tracks = data.items);
+      }
+    });
   }
 }

@@ -11,19 +11,23 @@
     </div>
   </div>
 
-  <div class="card p-3 mb-4">
+  <div class="text-center text-muted" *ngIf="album.id != id">
+    Nessun album trovato con questo ID
+  </div>
+
+  <div class="card p-3 mb-4" *ngIf="album.id == id">
     <div class="d-flex">
       <div class="flex-shrink-0">
-        <img src="{{album.images[1].url}}" alt="conver" class="rounded img-fluid">
+        <img [src]="album.images[1].url" [alt]="album.name" class="rounded img-fluid">
       </div>
       <div class="flex-grow-1 ms-3 align-self-end mb-2">
         <h1 class="mb-0">{{album.name}}</h1>
-        <p class="text-muted mb-0">{{tracks.length}} brani &bull; <a href="javascrip:void(0)"(click)="navigate(album.artists[0].id)">{{album.artists[0].name}}</a></p>
+        <p class="text-muted mb-0">{{tracks.length}} brani &bull; <a [routerLink]="['/artist', album.artists[0].id]">{{album.artists[0].name}}</a></p>
       </div>
     </div>
   </div>
 
-  <div class="row">
+  <div class="row" *ngIf="album.id == id">
     <h3>Brani</h3>
     <div class="col-md-12">
       <table class="table table-striped">

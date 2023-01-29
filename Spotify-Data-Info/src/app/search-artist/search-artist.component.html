@@ -17,9 +17,9 @@
   <div class="row row-cols-1 row-cols-md-4 g-4">
     <div class="col" *ngFor="let a of artists">
       <div class="card">
-        <img src="{{a.images[0] ? a.images[0].url : 'https://i.scdn.co/image/ab6761610000e5ebdd792b67eab4db295050d808'}}" class="card-img-top" alt="{{ a.name }}" />
+        <img [src]="a.images[0] ? a.images[0].url : 'https://i.scdn.co/image/ab6761610000e5ebdd792b67eab4db295050d808'" class="card-img-top" [alt]="a.name" />
         <div class="card-body">
-          <h5 class="card-title"><a href="javascipt:void(0)" (click)="navigate(a.id)">{{ a.name }}</a></h5>
+          <h5 class="card-title"><a href="javascipt:void(0)" [routerLink]="['/artist', a.id]">{{ a.name }}</a></h5>
         </div>
       </div>
     </div>

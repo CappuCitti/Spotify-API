@@ -21,12 +21,4 @@ export class SearchAlbumComponent implements OnInit {
     var q = e.target.value;
     this.spotify.albums(q).subscribe(data => this.albums = data.albums.items);
   }
-
-  artistNavigate(id: string) {
-    this.router.navigate([`artist/${id}`])
-  }
-
-  albumNavigate(id: string) {
-    this.router.navigate([`album/${id}`])
-  }
 }

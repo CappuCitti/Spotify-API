@@ -10,7 +10,7 @@ export class Artist {
     public type: string = "",
     public uri: string = "",
     public genres: string[] = [],
-    public images: Image[] = [],
+    public images: Image[] = [new Image(), new Image(), new Image()],
     public followers: Followers = new Followers(),
     public popularity: number = 0,
     public external_urls: URLs = new URLs(),

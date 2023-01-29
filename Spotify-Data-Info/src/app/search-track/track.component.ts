@@ -21,8 +21,4 @@ export class SearchTrackComponent implements OnInit {
     var q = e.target.value;
     this.spotify.tracks(q).subscribe(data => this.tracks = data.tracks.items);
   }
-
-  navigate(id: string) {
-    this.router.navigate([`artist/${id}`])
-  }
 }

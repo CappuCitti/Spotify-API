@@ -11,14 +11,18 @@
     </div>
   </div>
 
-  <div class="row">
+  <div class="text-center text-muted" *ngIf="artist.id != id">
+    Nessun artista trovato con questo ID
+  </div>
+
+  <div class="row" *ngIf="artist.id == id">
     <div class="col-lg-4">
       <div class="card mb-4">
         <div class="card-body text-center">
-          <img src="{{artist.images[0].url}}" alt="avatar" class="rounded img-fluid">
+          <img [src]="artist.images[0].url" [alt]="artist.name" class="rounded img-fluid">
           <h5 class="my-3">{{artist.name}}</h5>
           <div class="d-flex justify-content-center mb-2">
-            <a class="btn btn-outline-success ms-1" href="{{artist.external_urls.spotify}}" target="_blank"><b>↗</b>Apri su spotify</a>
+            <a class="btn btn-outline-success ms-1" [href]="artist.external_urls.spotify" target="_blank"><b>↗</b>Apri su spotify</a>
           </div>
         </div>
       </div>
@@ -58,18 +62,15 @@
   </div>
 
   
-  <h3>Album</h3>
-  <div class="row row-cols-1 row-cols-md-4 g-4">
+  <h3 *ngIf="artist.id == id">Album</h3>
+  <div class="row row-cols-1 row-cols-md-4 g-4" *ngIf="artist.id == id">
     <div class="col" *ngFor="let a of albums">
       <div class="card">
-        <a href="javascript:void(0)" (click)="navigate(a.id)">
-          <img src="{{a.images[0].url}}" class="card-img-top" alt="{{ a.name }}" />
+        <a [routerLink]="['/album', a.id]">
+          <img [src]="a.images[0].url" class="card-img-top" [alt]="a.name" />
         </a>
         <div class="card-body">
           <h5 class="card-title">{{ a.name }}</h5>
-          <p class="card-text">
-
-          </p>
         </div>
       </div>
     </div>

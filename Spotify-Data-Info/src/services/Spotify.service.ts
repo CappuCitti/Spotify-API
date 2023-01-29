@@ -11,13 +11,14 @@ import { Data as AlbumsData } from 'src/models/AlbumsData.model';
 import { Data as AlbumTracksData } from 'src/models/AlbumTracksData.mode';
 import { Data as TrackData } from 'src/models/TracksData.model';
 import { Data as ArtistsData} from 'src/models/ArtistsData.model';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SpotifyService {
   private baseURL: string = 'https://api.spotify.com/v1';
-  private auth_token: string = 'BQDWan1uRXYgBK2u22wiRnQf7yXvYNzXTn2CXmbrwOfwOhpGemPef4RSGHOMu2QM07_cM-U4EfvLlNBRU8IGa5AmQqKEU0aLbGTBPZBNqdr-0FxH386ErREYqv52WpqAKf14XSsO4l5BTGKxWO0cZLHc5-LGgLwkTDEsSOGmITs';
+  private auth_token: string = environment.auth_token;
 
   constructor(
     private http: HttpClient,
